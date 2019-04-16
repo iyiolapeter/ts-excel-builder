@@ -283,12 +283,15 @@ export class Workbook {
 
   public save() {
     return new Promise<string>((resolve, reject) => {
-      const target = path.resolve(this.fpath, this.fname);
       this.generate()
         .then(zip => {
           return zip.generateAsync({ type: "nodebuffer" });
         })
         .then(buffer => {
+            const target = path.resolve(this.fpath, this.fname);
+            if(!fs.existsSync(path.resolve(this.fpath))){
+                fs.mkdirSync(path.resolve(this.fpath))
+            }
           fs.writeFile(target, buffer, error => {
             if (error) {
               reject(error);
