@@ -504,8 +504,8 @@ export class Sheet {
           }
           if (ix.v !== 0) {
             c.att("t", "s");
+            c.ele("v", "" + (ix.v - 1));
           }
-          c.ele("v", "" + (ix.v - 1));
         }
       }
     }
